@@ -1,0 +1,5 @@
+# coding=GBK
+import os
+print(os.path.basename(__file__))
+print(os.path.abspath('main.py'))
+print(os.path.realpath(__file__)
