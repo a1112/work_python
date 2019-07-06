@@ -1,7 +1,11 @@
-import logging
-import os
-import shlex
-def call_file_shell():
-    codes=input('file->>>{0}>'.format(os.getcwd))
-    codes=shlex.shlex(codes)
+#xls,xlsx
+
+#user xlrd ,xlsxwriter
+import xlsxwriter
+import xlrd
+
+
+def openxls(xls_path, sheet=None):
+    work_book=xlsxwriter.Workbook(xls_path)
     
+    worksheet = work_book.add_worksheet()
