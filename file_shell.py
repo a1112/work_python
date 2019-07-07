@@ -4,6 +4,16 @@ import csv
 #user xlrd ,xlsxwriter
 import xlsxwriter
 import json
+import collections
+
+
+
+class format_class():
+    def __init__(format_dict):
+        __self__.format=format_dict['format']
+        __self__.map=collections.Counter()
+        for rows in format_dict['map']:
+            
 
 def writer_csv(filename,data,modem='w',headers=None):
     with open(filename,modem,newline='') as f:
@@ -23,6 +33,9 @@ def write_excel_simple(worksheet,data):
 
 
 def read_excel_from_json(workbooh,json_path):
+    Format=collections.namedtuple({'format':{'format':'mat','map':'index'}})
+    Format()
+
     with open(json_path,'r+' ,encoding='utf-8')as f:
         js=json.load(f)
         js_keys=js_keys
@@ -35,9 +48,13 @@ def read_excel_from_json(workbooh,json_path):
         else:
             data=None
         if 'format' in js_keys:
-            format=js['format']
+            formats=js['format']
         else:
-            format=None
+            formats=None
+        writer_cxcel_from_json(sheet,data,formats)
+def writer_cxcel_from_json(sheet,data,formats):
+    Format=collections.namedtuple('Format',['format','mat','setmap','index'])
+    for  format_name in formats
 
 
         
@@ -66,23 +83,29 @@ def int_to_map_row(raw_int):
     w_str_up=[chr(i)  for i in range(ord('A'),ord('Z')+1)]
     if isinstance( raw_int,str):
         if set(raw_int.lower())<set(w_str+w_str_up):
-            return raw_int
+            return raw_int.upper()
         else:
-            raise TypeError('row error a-z')
+            raise TypeError('row error a-z/A-Z')
     else:
         re_str=[]
-        while raw_int:
+        
+        while raw_int!=1:
             re_str.append(raw_int%26)
-            raw_int=int(raw_int/26)
+            raw_int=int(raw_int/26)+1
+        print(re_str)
+        re_str.reverse()
         for i in range(len(re_str)):
-            re_str[i]=
+            if re_str[i]==0:
+                re_str[i]=w_str_up[ -1]
+            else:
+                re_str[i]=w_str_up[ re_str[i]-1]
+        return ''.join(re_str)
 
 
 
 
 def check_x_y(x,y,map_dirt):
     try:
-
         if x in map_dirt.keys():
 
     except expression as identifier:
