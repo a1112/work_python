@@ -8,7 +8,6 @@ import collections
 
 def check_row_clo(x,y,format):
     format=format['map']
-    print(format)
     for row in format.keys():
         if __check_cell__(x,row) and __check_cell__(y,format[row]):
             return True
@@ -84,8 +83,7 @@ def writer_cxcel_from_json(worksheet,data,formats,workbook):
             dict_add={}
             for the_format in  formats.keys():
                 if check_row_clo(row,col, formats[the_format]):
-                    print({**formats[the_format]['format'],**dict_add})
-                    dict_add={**formats[the_format]['format'],**dict_add}
+                     dict_add={**formats[the_format]['format'],**dict_add}
             
             data[row][col]=try_cast_number(data[row][col])
             worksheet.write(row, col,  data[row][col],workbook.add_format(dict_add))
