@@ -1,0 +1,17 @@
+{
+    "sheet_name": "",
+    "isNonProfit": true,
+    "format": {
+        "money":
+        {"format":
+            {"num_format": "$#,##0",
+            "bold": true, 
+            "font_color": "red"
+            },
+            "map":{
+                "A":[1,2],
+                "B":"*"
+            }
+        }
+    }
+}
