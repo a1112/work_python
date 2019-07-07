@@ -3,10 +3,10 @@ import csv
 
 #user xlrd ,xlsxwriter
 import xlsxwriter
+import json
 
-
-def writer_csv(filename,data,headers=None):
-    with open(filename,'w',newline='') as f:
+def writer_csv(filename,data,modem='w',headers=None):
+    with open(filename,modem,newline='') as f:
         csv_write=csv.writer(f)
         if headers:
             csv_write.writerow(headers)
@@ -21,7 +21,54 @@ def write_excel_simple(worksheet,data):
             data[row][col]=try_cast_number(data[row][col])
             worksheet.write(row, col,  data[row][col])
 
+
+def read_excel_from_json(workbooh,json_path):
+    with open(json_path,'r+' ,encoding='utf-8')as f:
+        js=json.load(f)
+        js_keys=js_keys
+        if 'sheet_name' in js_keys:
+            sheet=workbooh.add_worksheet(js['sheet_name'])
+        else:
+            sheet=workbooh.add_worksheet()
+        if 'data' in js_keys:
+            data=read_csv( js['data'])
+        else:
+            data=None
+        if 'format' in js_keys:
+            format=js['format']
+        else:
+            format=None
+        
+
+        
+
+
+
+        print(dict( js['format']))
+def map_raw_to_int(raw_string):
+    if type(try_cast_number[ raw_string]) in [int,float]:
+        return  try_cast_number(raw_string)
+    else:
+        k=0
+        num_raw=0
+        len(raw_string)
+        for i in raw_string:
+            n=(''.join([chr(i)  for i in range(ord('a'),ord('z')+1)]).find(i.lower())+1)
+            num_raw =n+k*num_raw*26
+            k=k+1
+            if n==0:
+                raise ValueError('raw_error in json or other')
+        return num_raw
     
+def check_x_y(x,y,map_dirt):
+    try:
+
+        if x in map_dirt.keys():
+
+    except expression as identifier:
+        pass
+    else:
+        pass
 
 import configparser
 conf=configparser.ConfigParser()
@@ -85,7 +132,8 @@ def openxls(xls_path, sheet=None):
 
 
 
-def write():
+
+
 
 
 
