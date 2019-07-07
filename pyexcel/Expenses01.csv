@@ -1,0 +1,5 @@
+Rent,1000
+Gas,100
+Food,300
+Gym,50
+Total,=SUM(B1:B4)

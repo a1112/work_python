@@ -38,6 +38,8 @@ def read_excel_from_json(workbooh,json_path):
             format=js['format']
         else:
             format=None
+
+
         
 
         
@@ -45,7 +47,7 @@ def read_excel_from_json(workbooh,json_path):
 
 
         print(dict( js['format']))
-def map_raw_to_int(raw_string):
+def map_row_to_int(raw_string):
     if type(try_cast_number[ raw_string]) in [int,float]:
         return  try_cast_number(raw_string)
     else:
@@ -59,7 +61,25 @@ def map_raw_to_int(raw_string):
             if n==0:
                 raise ValueError('raw_error in json or other')
         return num_raw
-    
+def int_to_map_row(raw_int):
+    w_str=[chr(i)  for i in range(ord('a'),ord('z')+1)]
+    w_str_up=[chr(i)  for i in range(ord('A'),ord('Z')+1)]
+    if isinstance( raw_int,str):
+        if set(raw_int.lower())<set(w_str+w_str_up):
+            return raw_int
+        else:
+            raise TypeError('row error a-z')
+    else:
+        re_str=[]
+        while raw_int:
+            re_str.append(raw_int%26)
+            raw_int=int(raw_int/26)
+        for i in range(len(re_str)):
+            re_str[i]=
+
+
+
+
 def check_x_y(x,y,map_dirt):
     try:
 
