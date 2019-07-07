@@ -6,13 +6,36 @@ import xlsxwriter
 import json
 import collections
 
+def check_row_clo(x,y,format):
+    format=format['map']
+    print(format)
+    for row in format.keys():
+        if __check_cell__(x,row) and __check_cell__(y,format[row]):
+            return True
+    return False
 
+def __check_cell__(x,string):
+    x=str(x)
+    if string=='*':
+        return True
+    else:
+        strs=string.split(',')
+        if x in strs:
+            return True
+        else :
+            for area in [ar for ar in strs if ':' in ar]:
+                a0=area.split(':')[0].upper()
+                a1=area.split(':')[1].upper()
+                if a0<=x.upper() and a1>=x.upper() and len(a0)<=len(x) and len(a1)>=len(x):
+                    return True
+    return False
 
 class format_class():
     def __init__(format_dict):
         __self__.format=format_dict['format']
         __self__.map=collections.Counter()
         for rows in format_dict['map']:
+            pass
             
 
 def writer_csv(filename,data,modem='w',headers=None):
@@ -33,37 +56,46 @@ def write_excel_simple(worksheet,data):
 
 
 def read_excel_from_json(workbooh,json_path):
-    Format=collections.namedtuple({'format':{'format':'mat','map':'index'}})
-    Format()
+    # Format=collections.namedtuple({'format':{'format':'mat','map':'index'}})
+    # Format()
 
     with open(json_path,'r+' ,encoding='utf-8')as f:
         js=json.load(f)
-        js_keys=js_keys
+        js_keys=js.keys()
         if 'sheet_name' in js_keys:
             sheet=workbooh.add_worksheet(js['sheet_name'])
+            
         else:
             sheet=workbooh.add_worksheet()
         if 'data' in js_keys:
-            data=read_csv( js['data'])
+            data=read_csv(js['data'])
         else:
             data=None
         if 'format' in js_keys:
             formats=js['format']
         else:
             formats=None
-        writer_cxcel_from_json(sheet,data,formats)
-def writer_cxcel_from_json(sheet,data,formats):
-    Format=collections.namedtuple('Format',['format','mat','setmap','index'])
-    for  format_name in formats
-
-
+        writer_cxcel_from_json(sheet,data,formats,workbooh)
+def writer_cxcel_from_json(worksheet,data,formats,workbook):
+    # for the_format in  formats.keys():
+    #     formats[the_format]['format']=workbook.add_format(formats[the_format]['format'])
+    for row in range(len(data)):
+        for col in range(len(data[0])):
+            dict_add={}
+            for the_format in  formats.keys():
+                if check_row_clo(row,col, formats[the_format]):
+                    print({**formats[the_format]['format'],**dict_add})
+                    dict_add={**formats[the_format]['format'],**dict_add}
+            
+            data[row][col]=try_cast_number(data[row][col])
+            worksheet.write(row, col,  data[row][col],workbook.add_format(dict_add))
+workbooh=xlsxwriter.Workbook('headers_footers.xlsx')
+read_excel_from_json(workbooh,'test.json')
+workbooh.close()
         
 
-        
 
 
-
-        print(dict( js['format']))
 def map_row_to_int(raw_string):
     if type(try_cast_number[ raw_string]) in [int,float]:
         return  try_cast_number(raw_string)
@@ -102,16 +134,6 @@ def int_to_map_row(raw_int):
         return ''.join(re_str)
 
 
-
-
-def check_x_y(x,y,map_dirt):
-    try:
-        if x in map_dirt.keys():
-
-    except expression as identifier:
-        pass
-    else:
-        pass
 
 import configparser
 conf=configparser.ConfigParser()

@@ -1,16 +1,15 @@
 {
     "sheet_name": "",
+    "data":"Expenses01.csv",
     "isNonProfit": true,
     "format": {
         "money":
         {"format":
             {"num_format": "$#,##0",
-            "bold": true, 
             "font_color": "red"
             },
             "map":{
-                "A":[1,2],
-                "B":"*"
+                "2":"1,2,3,4,5,6"
             }
         }
     }
